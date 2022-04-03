@@ -22,7 +22,6 @@ result_text= callPage_1.find('div', class_='3.3 test')
 
 # TC ID_TC-00001
 event = service.events().get(calendarId='primary', eventId='eventId').execute()
-event['summary'] = '3.3 test' # 업데이트할 캘린더 호출
 
 if event == '3.3 test': # 업데이트할 캘린더 호출 확인
 	result_text = callPage_1.find('div', class_='3.3 test') # 제목이 3.3 test인 일정 변수에 저장
@@ -31,10 +30,14 @@ if event == '3.3 test': # 업데이트할 캘린더 호출 확인
 		result_edit = callPage_1.find('div', class_='GmuOkf')
 		if result_edit == null : # 수정버튼 노출여부 확인
 			pyautogui.click(x=100, y=200, result_edit) # 버튼 좌표 x=100, y=200이라 가정, 수정버튼 클릭
-			
+			calendar['summary'] = '3.3 test_1'
+			updated_calendar = service.calendars().update(calendarId=calendar['id'], body=calendar).execute() # 캘린더 제목 업데이트
+			result_text = callPage_1.find('div', class_='3.3 test_1') # 제목이 3.3 test인 일정 변수에 저장
+			if result_update == '3.3 test_1'
+				print ('Pass >>> 제목 수정완료')
 
-			
-		
+			else 
+				print ('Fail >>> 제목수정 실패')
 		else
 			print ('Fail >>> 수정버튼 노출되지 않음')
 		
