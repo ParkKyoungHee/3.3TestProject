@@ -1,0 +1,45 @@
+from tkinter import *
+import tkinter as tk
+import tkinter.ttk
+import tkinter.font
+import os
+import re
+
+from selenium.webdriver.common.alert 
+import Alert
+import webdriver
+import ActionChains
+
+from bs4 import BeautifulSoup
+
+import pyautogui
+
+# 캘린더 리스트화면 타켓 URL 호출하여 파싱후 저장(공통)
+Target_URL = 'https://calendar.google.com/calendar/u/0/r/day/2022/4/4?pli=1'
+Requested_Page1= requests.get(TargetURL)
+callPage_1= BeautifulSoup(Requested_Page1.text, 'html.parser')
+result_text= callPage_1.find('div', class_='3.3 test')
+
+# TC ID_TC-00001
+event = service.events().get(calendarId='primary', eventId='eventId').execute()
+event['summary'] = '3.3 test' # 업데이트할 캘린더 호출
+
+if event == '3.3 test': # 업데이트할 캘린더 호출 확인
+	result_text = callPage_1.find('div', class_='3.3 test') # 제목이 3.3 test인 일정 변수에 저장
+	pyautogui.click(x=100, y=200, event) # 버튼 좌표 x=100, y=200이라 가정, 일정 클릭 이벤트
+	if result_text == null : # 일정 선택시 상세 팝업 발생 확인
+		result_edit = callPage_1.find('div', class_='GmuOkf')
+		if result_edit == null : # 수정버튼 노출여부 확인
+			pyautogui.click(x=100, y=200, result_edit) # 버튼 좌표 x=100, y=200이라 가정, 수정버튼 클릭
+			
+
+			
+		
+		else
+			print ('Fail >>> 수정버튼 노출되지 않음')
+		
+	else 
+		print ('Fail >>> 캘린더 상세 팝업이 발생하지 않음')
+
+else
+	print('Fail >>> 일정 존재하지 않음')
